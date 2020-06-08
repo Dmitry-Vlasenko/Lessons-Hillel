@@ -1,0 +1,7 @@
+sudo -i
+yum -y install lvm2
+pvcreate /dev/xvd{b,e,f} #initialize dev
+vgcreate vol_grp1 //dev/xvd{b,e,f} #creation grp
+lvcreate -l 100%FREE -n logical_vol1 vol_grp1 #creation logical toms
+mkfs.ext4 /dev/vol_grp1/logical_vol1 #format ext4 logical toms
+mount /dev/vol_grp1/logical_vol1 /mnt/ #mount

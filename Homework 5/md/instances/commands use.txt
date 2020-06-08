@@ -1,0 +1,8 @@
+sudo -i
+yum -y install mdadm
+mdadm --create --verbose /dev/md0 -l 0 -n 3 /dev/xvd{b,e,f} #create RAID0 S
+mkdir /etc/mdadm #create folder mdadm
+echo "DEVICE partitions" > /etc/mdadm/mdadm.conf #create config file
+mdadm --detail --scan --verbose | awk '/ARRAY/ {print}' >> /etc/mdadm/mdadm.conf
+mkfs.ext4 /dev/md0 #format ext4 RAID0
+mount /dev/md0 /mnt/ #mount RAID0
