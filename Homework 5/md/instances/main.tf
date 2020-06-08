@@ -52,6 +52,7 @@ resource "aws_security_group" "ssh_hhtp_https" {
 resource "aws_instance" "Centos7" {
   ami                    = data.aws_ami.Centos7.id
   instance_type          = local.workspace["instance_type"]
+  user_data              = file("scripts/md.sh")
   key_name               = "Frankfurt"
   vpc_security_group_ids = ["${aws_security_group.ssh_hhtp_https.id}"]
   ebs_block_device {
