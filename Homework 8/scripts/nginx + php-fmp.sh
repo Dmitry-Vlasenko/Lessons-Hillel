@@ -1,5 +1,4 @@
 #!/bin/bash
-setenforce 0
 yum -y update
 cat <<'EOF' >  /etc/yum.repos.d/nginx.repo
 [nginx-stable]
@@ -76,3 +75,9 @@ EOF
 chown -R nginx:nginx /var/www2/
 systemctl start php-fpm
 systemctl start nginx
+yum -y install setools
+curl localhost
+audit2allow -a -M test
+semodule -i test.pp
+systemctl restart php-fpm
+systemctl restart nginx
