@@ -1,5 +1,6 @@
 #!/bin/bash
 setenforce 0
+yum -y update
 cat <<'EOF' >  /etc/yum.repos.d/nginx.repo
 [nginx-stable]
 name=nginx stable repo
