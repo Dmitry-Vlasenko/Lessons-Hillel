@@ -1,5 +1,5 @@
 #!/bin/bash
-yum -y update
+yusm -y update && echo>>/var/log/testlog good update || echo>>/var/log/testlog bad update
 cat <<'EOF' >  /etc/yum.repos.d/nginx.repo
 [nginx-stable]
 name=nginx stable repo
@@ -18,7 +18,7 @@ gpgkey=https://nginx.org/keys/nginx_signing.key
 module_hotfixes=true
 EOF
 yum-config-manager --enable nginx-mainline
-yum -y install nginx
+yum -y install nginx && echo>>/var/log/testlog good install nginx || echo>>/var/log/testlog bad install nginx
 cat <<'EOF' > /etc/nginx/conf.d/default.conf
 server {
     listen       80;
@@ -42,9 +42,9 @@ server {
     }
 }
 EOF
-yum -y install epel-release
-yum -y repolist
-yum -y install php php-fpm
+yum -y install epel-release && echo>>/var/log/testlog good install epel-release || echo>>/var/log/testlog bad install epel-release
+yum -y repolist 
+yum -y install php php-fpm && echo>>/var/log/testlog good install php php-fpm || echo>>/var/log/testlog bad install php php-fpm
 cat <<'EOF' >/etc/php-fpm.d/www.conf
 [www]
 user = nginx
@@ -66,18 +66,13 @@ php_value[session.save_handler] = files
 php_value[session.save_path]    = /var/lib/php/session
 php_value[soap.wsdl_cache_dir]  = /var/lib/php/wsdlcache
 EOF
-mkdir /var/www2/
+mkdir /var/www2/ && echo>>/var/log/testlog good create directory|| echo>>/var/log/testlog bad create directory
 cat <<'EOF' > /var/www2/index.php
 <?php
 phpinfo();
 ?>
 EOF
-chown -R nginx:nginx /var/www2/
-systemctl start php-fpm
-systemctl start nginx
-yum -y install setools
-curl localhost
-audit2allow -a -M test
-semodule -i test.pp
-systemctl restart php-fpm
-systemctl restart nginx
+chown -R nginx:nginx /var/www2/ && echo>>/var/log/testlog good create permission directory|| echo>>/var/log/testlog bad create permission directory
+setenforce 0 && echo>>/var/log/testlog good off selinux|| echo>>/var/log/testlog bad off selinux
+systemctl start php-fpm && echo>>/var/log/testlog good start php-fpm|| echo>>/var/log/testlog bad startt php-fpm
+systemctl start nginx && echo>>/var/log/testlog good start nginx|| echo>>/var/log/testlog bad startt nginx
