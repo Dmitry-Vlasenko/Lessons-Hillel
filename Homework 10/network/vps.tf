@@ -43,12 +43,10 @@ resource "aws_security_group" "nat" {
     Name = "NATSG"
   }
 }
-/*
 resource "aws_eip" "nat" {
   instance = aws_instance.nat.id
   vpc      = true
 }
-*/
 /*
   Public Subnet
 */
