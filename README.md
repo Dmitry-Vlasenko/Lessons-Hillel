@@ -1,6 +1,4 @@
-h1 Lessons-Hillel.
-
-h2 Homework
+Lessons-Hillel.
 
 The numbering of homework depends on the lesson when it was asked.
 
