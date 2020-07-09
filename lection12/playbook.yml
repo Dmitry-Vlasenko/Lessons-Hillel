@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: install htom, vim, epel-release
+      yum:
+        name: "{{ item }}"
+      loop:
+        - htop
+        - vim
+        - epel-release
