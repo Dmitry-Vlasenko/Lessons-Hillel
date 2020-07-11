@@ -13,4 +13,6 @@ Homework 4 creature instance, auto create lvm and md.
 
 Homework 7 creature instance, auto install nginx+php later create config file php + nginx and try catch error.
 
-Homework 10 creature vps
+Homework 10 creature vps.
+
+Homework 13 created terraform instance centos and ubuntu after created ansible playbook install apache to centos and ubuntu, starting webpage.
