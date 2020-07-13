@@ -5,30 +5,28 @@
   tasks:
     - name: Check linux family
       debug: var=ansible_os_family
-  
+
     - name: install RedHat
       yum: name="{{ item }}" state=latest
       loop:
-       - httpd
+        - httpd
       when: ansible_os_family == "RedHat"
-    
+
     - name: install Debian
       apt: name="{{ item }}" state=latest
       loop:
         - apache2
       when: ansible_os_family == "Debian"
-    
-    - name: copy 
+
+    - name: copy
       copy:
         src: ./html/
         dest: /var/www/html
-    
-    - name: start ftp RedHat
-      service: 
-        name=httpd state=restarted
+
+    - name: start httpd RedHat
+      service: name=httpd state=restarted
       when: ansible_os_family == "RedHat"
-    
-    - name: start ftp Debian
-      service: 
-        name=apache2 state=restarted
+
+    - name: start apache2 Debian
+      service: name=apache2 state=restarted
       when: ansible_os_family == "Debian"
