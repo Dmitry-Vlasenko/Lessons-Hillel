@@ -4,3 +4,4 @@
 .inventory.swp
 .inventory.swo
 .terraform.tfstate.lock.info
+.idea
