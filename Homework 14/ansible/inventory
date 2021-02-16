@@ -1,0 +1,2 @@
+server1_ubuntu ansible_ssh_host=18.196.211.246 ansible_ssh_user=ubuntu ansible_ssh_private_key_file=~/.ssh/Frankfurt.pem
+server2_centos ansible_ssh_host=18.197.179.207 ansible_ssh_user=centos ansible_ssh_private_key_file=~/.ssh/Frankfurt.pem
